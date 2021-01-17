@@ -1,0 +1,1065 @@
+{
+  "export_version": "0.10",
+  "framed_nodes": {
+    "Cylinder": "Frame",
+    "Matrix Apply": "Frame",
+    "Matrix In": "Frame"
+  },
+  "groups": {},
+  "nodes": {
+    "Cylinder": {
+      "bl_idname": "SvCylinderNodeMK2",
+      "color": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "custom_socket_props": {},
+      "height": 7.460000038146973,
+      "hide": false,
+      "label": "",
+      "location": [
+        -119.81805419921875,
+        249.08612060546875
+      ],
+      "params": {
+        "height": 7.460000038146973
+      },
+      "use_custom_color": true,
+      "width": 140.0
+    },
+    "Cylinder.001": {
+      "bl_idname": "SvCylinderNodeMK2",
+      "color": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "custom_socket_props": {},
+      "height": 2.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        360.0,
+        -1640.0
+      ],
+      "params": {
+        "cap_bottom": false,
+        "cap_top": false,
+        "center": false,
+        "height": 2.0,
+        "meridians": 10
+      },
+      "use_custom_color": true,
+      "width": 140.0
+    },
+    "Extrude Region": {
+      "bl_idname": "SvExtrudeRegionNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        569.3948974609375,
+        -1780.8887939453125
+      ],
+      "params": {
+        "mask_out_type": [
+          "in"
+        ]
+      },
+      "width": 140.0
+    },
+    "Extrude Separate Faces": {
+      "bl_idname": "SvExtrudeSeparateNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        995.9881591796875,
+        -1507.6121826171875
+      ],
+      "params": {
+        "extrude_mode": "MATRIX",
+        "height_": 0.46000006794929504
+      },
+      "width": 140.0
+    },
+    "Float to Int.001": {
+      "bl_idname": "Float2IntNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1560.0,
+        -380.0
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "Frame": {
+      "bl_idname": "NodeFrame",
+      "custom_socket_props": {},
+      "height": 674.0861206054688,
+      "hide": false,
+      "label": "Cylinder",
+      "location": [
+        -40.0,
+        40.0
+      ],
+      "params": {},
+      "width": 429.5140380859375
+    },
+    "Frame info": {
+      "bl_idname": "SvFrameInfoNodeMK2",
+      "color": [
+        0.0,
+        0.5,
+        0.20000000298023224
+      ],
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        -160.0,
+        -720.0
+      ],
+      "params": {},
+      "use_custom_color": true,
+      "width": 140.0
+    },
+    "List Input": {
+      "bl_idname": "SvListInputNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1160.0,
+        -440.0
+      ],
+      "params": {
+        "int_": 6,
+        "int_list": [
+          0,
+          21,
+          9,
+          30,
+          18,
+          39,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "width": 140.0
+    },
+    "List Item": {
+      "bl_idname": "SvListItemNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        808.0301513671875,
+        -1922.9366455078125
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "List Join": {
+      "bl_idname": "ListJoinNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1193.4862060546875,
+        -1718.649658203125
+      ],
+      "params": {
+        "JoinLevel": 2
+      },
+      "width": 140.0
+    },
+    "List Length": {
+      "bl_idname": "ListLengthNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        635.367431640625,
+        -2315.57666015625
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "List Slice": {
+      "bl_idname": "ListSliceNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1400.0,
+        -160.0
+      ],
+      "params": {
+        "level": 1,
+        "start": 7,
+        "stop": 8
+      },
+      "width": 140.0
+    },
+    "Map Range": {
+      "bl_idname": "SvMapRangeNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        20.0,
+        -700.0
+      ],
+      "params": {
+        "new_max": 720.0,
+        "old_max": 100.0
+      },
+      "width": 140.0
+    },
+    "Matrix Apply": {
+      "bl_idname": "SvMatrixApplyJoinNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        85.39682006835938,
+        180.6673583984375
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "Matrix Apply.001": {
+      "bl_idname": "SvMatrixApplyJoinNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1640.0,
+        160.0
+      ],
+      "params": {
+        "do_join": false
+      },
+      "width": 219.262451171875
+    },
+    "Matrix Apply.002": {
+      "bl_idname": "SvMatrixApplyJoinNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        680.0,
+        -340.0
+      ],
+      "params": {},
+      "width": 196.96923828125
+    },
+    "Matrix Apply.004": {
+      "bl_idname": "SvMatrixApplyJoinNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1920.0,
+        260.0
+      ],
+      "params": {},
+      "width": 178.825439453125
+    },
+    "Matrix Apply.005": {
+      "bl_idname": "SvMatrixApplyJoinNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        620.0,
+        280.0
+      ],
+      "params": {
+        "do_join": false
+      },
+      "width": 140.0
+    },
+    "Matrix Apply.006": {
+      "bl_idname": "SvMatrixApplyJoinNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        980.0,
+        -380.0
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "Matrix In": {
+      "bl_idname": "SvMatrixInNodeMK4",
+      "custom_socket_props": {
+        "0": {
+          "expanded": true
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        -144.11720275878906,
+        -155.79849243164062
+      ],
+      "params": {
+        "angle": 180.0,
+        "axis": [
+          0.0,
+          1.0,
+          1.0
+        ]
+      },
+      "width": 140.0
+    },
+    "Matrix In.001": {
+      "bl_idname": "SvMatrixInNodeMK4",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        220.0,
+        -1040.0
+      ],
+      "params": {
+        "rotation_mode": "EULER"
+      },
+      "width": 140.0
+    },
+    "Matrix In.002": {
+      "bl_idname": "SvMatrixInNodeMK4",
+      "custom_socket_props": {
+        "0": {
+          "expanded": true
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        400.0,
+        -680.0
+      ],
+      "params": {
+        "angle": 183.17999267578125,
+        "angle_x": -0.6599999666213989,
+        "location_": [
+          6.0,
+          0.0,
+          0.0
+        ]
+      },
+      "width": 140.0
+    },
+    "Matrix In.003": {
+      "bl_idname": "SvMatrixInNodeMK4",
+      "custom_socket_props": {
+        "0": {
+          "expanded": true
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        160.0,
+        -1660.0
+      ],
+      "params": {
+        "location_": [
+          0.0,
+          0.0,
+          1.559999942779541
+        ]
+      },
+      "width": 140.0
+    },
+    "Matrix In.004": {
+      "bl_idname": "SvMatrixInNodeMK4",
+      "custom_socket_props": {
+        "1": {
+          "expanded": true
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        340.0,
+        -2100.0
+      ],
+      "params": {
+        "scale": [
+          2.0,
+          2.0,
+          1.0
+        ]
+      },
+      "width": 140.0
+    },
+    "Matrix In.005": {
+      "bl_idname": "SvMatrixInNodeMK4",
+      "custom_socket_props": {
+        "0": {
+          "expanded": true
+        },
+        "1": {
+          "expanded": true
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        727.8253784179688,
+        -1509.241455078125
+      ],
+      "params": {
+        "location_": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scale": [
+          0.800000011920929,
+          1.0,
+          1.0
+        ]
+      },
+      "width": 140.0
+    },
+    "Matrix In.006": {
+      "bl_idname": "SvMatrixInNodeMK4",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1182.91796875,
+        -2385.924072265625
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "Mesh Join": {
+      "bl_idname": "SvMeshJoinNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1105.750244140625,
+        -2037.06787109375
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "Mesh viewer": {
+      "bl_idname": "SvMeshViewer",
+      "color": [
+        1.0,
+        0.5889999866485596,
+        0.21400000154972076
+      ],
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        2380.0,
+        460.0
+      ],
+      "params": {
+        "selectable_objects": false
+      },
+      "use_custom_color": true,
+      "width": 140.0
+    },
+    "Mesh viewer.001": {
+      "bl_idname": "SvMeshViewer",
+      "color": [
+        1.0,
+        0.5889999866485596,
+        0.21400000154972076
+      ],
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1403.455810546875,
+        -1409.8880615234375
+      ],
+      "params": {
+        "base_data_name": "Beta",
+        "selectable_objects": false
+      },
+      "use_custom_color": true,
+      "width": 140.0
+    },
+    "Number Range": {
+      "bl_idname": "SvGenNumberRange",
+      "custom_socket_props": {
+        "1": {
+          "label": "step"
+        },
+        "2": {
+          "label": "count"
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        810.1473999023438,
+        -2302.692138671875
+      ],
+      "params": {
+        "current_mode": "RANGE_STEP",
+        "number_mode": "int",
+        "range_mode": "RANGE_STEP",
+        "step_int": 2
+      },
+      "width": 140.0
+    },
+    "Number Range.002": {
+      "bl_idname": "SvGenNumberRange",
+      "custom_socket_props": {
+        "1": {
+          "label": "stop"
+        },
+        "2": {
+          "label": "count"
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        -640.0,
+        -700.0
+      ],
+      "params": {
+        "count_": 7,
+        "current_mode": "RANGE_COUNT",
+        "number_mode": "int",
+        "range_mode": "RANGE_COUNT",
+        "step_int": 60,
+        "stop_int": 360
+      },
+      "width": 140.0
+    },
+    "Scalar Math": {
+      "bl_idname": "SvScalarMathNodeMK4",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        200.0,
+        -580.0
+      ],
+      "params": {
+        "current_op": "ADD"
+      },
+      "width": 140.0
+    },
+    "Scalar Math.001": {
+      "bl_idname": "SvScalarMathNodeMK4",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1006.5335083007812,
+        -2338.3232421875
+      ],
+      "params": {
+        "current_op": "MODULO",
+        "y_": 2.0
+      },
+      "width": 100.0
+    },
+    "Scalar Math.002": {
+      "bl_idname": "SvScalarMathNodeMK4",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1440.0,
+        -460.0
+      ],
+      "params": {
+        "current_op": "ADD"
+      },
+      "width": 113.6392822265625
+    },
+    "Stethoscope MK2": {
+      "bl_idname": "SvStethoscopeNodeMK2",
+      "color": [
+        0.5,
+        0.5,
+        1.0
+      ],
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        2736.2734375,
+        -872.3435668945312
+      ],
+      "params": {
+        "location_theta": 2.0,
+        "num_elements": 1,
+        "text_color": [
+          0.949999988079071,
+          0.949999988079071,
+          0.949999988079071
+        ]
+      },
+      "use_custom_color": true,
+      "width": 140.0
+    },
+    "Stethoscope MK2.001": {
+      "bl_idname": "SvStethoscopeNodeMK2",
+      "color": [
+        0.5,
+        0.5,
+        1.0
+      ],
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1635.189697265625,
+        -1865.4388427734375
+      ],
+      "params": {
+        "location_theta": 2.0,
+        "num_elements": 1,
+        "rounding": 1,
+        "text_color": [
+          0.949999988079071,
+          0.949999988079071,
+          0.949999988079071
+        ]
+      },
+      "use_custom_color": true,
+      "width": 140.0
+    },
+    "Stethoscope MK2.002": {
+      "bl_idname": "SvStethoscopeNodeMK2",
+      "color": [
+        0.5,
+        0.5,
+        1.0
+      ],
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        1382.43408203125,
+        -1775.9090576171875
+      ],
+      "params": {
+        "location_theta": 2.0,
+        "num_elements": 1,
+        "text_color": [
+          0.949999988079071,
+          0.949999988079071,
+          0.949999988079071
+        ]
+      },
+      "use_custom_color": true,
+      "width": 140.0
+    },
+    "Vector in.001": {
+      "bl_idname": "GenVectorsNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        420.0,
+        -500.0
+      ],
+      "params": {
+        "x_": 3.0
+      },
+      "width": 100.0
+    }
+  },
+  "update_lists": [
+    [
+      "Scalar Math.002",
+      0,
+      "Float to Int.001",
+      0
+    ],
+    [
+      "Matrix Apply.006",
+      0,
+      "List Slice",
+      0
+    ],
+    [
+      "List Input",
+      0,
+      "List Slice",
+      1
+    ],
+    [
+      "Float to Int.001",
+      0,
+      "List Slice",
+      2
+    ],
+    [
+      "Frame info",
+      0,
+      "Map Range",
+      0
+    ],
+    [
+      "Cylinder",
+      0,
+      "Matrix Apply",
+      0
+    ],
+    [
+      "Cylinder",
+      1,
+      "Matrix Apply",
+      1
+    ],
+    [
+      "Cylinder",
+      2,
+      "Matrix Apply",
+      2
+    ],
+    [
+      "Matrix In",
+      0,
+      "Matrix Apply",
+      3
+    ],
+    [
+      "Matrix Apply.005",
+      0,
+      "Matrix Apply.001",
+      0
+    ],
+    [
+      "Matrix Apply.005",
+      1,
+      "Matrix Apply.001",
+      1
+    ],
+    [
+      "Matrix Apply.005",
+      2,
+      "Matrix Apply.001",
+      2
+    ],
+    [
+      "List Slice",
+      0,
+      "Matrix Apply.001",
+      3
+    ],
+    [
+      "Vector in.001",
+      0,
+      "Matrix Apply.002",
+      0
+    ],
+    [
+      "Matrix In.002",
+      0,
+      "Matrix Apply.002",
+      3
+    ],
+    [
+      "Matrix Apply.001",
+      0,
+      "Matrix Apply.004",
+      0
+    ],
+    [
+      "Matrix Apply.001",
+      1,
+      "Matrix Apply.004",
+      1
+    ],
+    [
+      "Matrix Apply.001",
+      2,
+      "Matrix Apply.004",
+      2
+    ],
+    [
+      "Matrix Apply",
+      0,
+      "Matrix Apply.005",
+      0
+    ],
+    [
+      "Matrix Apply",
+      1,
+      "Matrix Apply.005",
+      1
+    ],
+    [
+      "Matrix Apply",
+      2,
+      "Matrix Apply.005",
+      2
+    ],
+    [
+      "Matrix Apply.002",
+      0,
+      "Matrix Apply.006",
+      0
+    ],
+    [
+      "Matrix In.001",
+      0,
+      "Matrix Apply.006",
+      3
+    ],
+    [
+      "Number Range.002",
+      0,
+      "Matrix In.001",
+      4
+    ],
+    [
+      "Scalar Math",
+      0,
+      "Matrix In.002",
+      7
+    ],
+    [
+      "Matrix Apply.004",
+      0,
+      "Mesh viewer",
+      0
+    ],
+    [
+      "Matrix Apply.004",
+      1,
+      "Mesh viewer",
+      1
+    ],
+    [
+      "Matrix Apply.004",
+      2,
+      "Mesh viewer",
+      2
+    ],
+    [
+      "Number Range.002",
+      0,
+      "Scalar Math",
+      0
+    ],
+    [
+      "Map Range",
+      0,
+      "Scalar Math",
+      1
+    ],
+    [
+      "List Input",
+      0,
+      "Scalar Math.002",
+      0
+    ],
+    [
+      "List Item",
+      0,
+      "Stethoscope MK2.001",
+      0
+    ],
+    [
+      "Cylinder.001",
+      0,
+      "Extrude Region",
+      0
+    ],
+    [
+      "Cylinder.001",
+      1,
+      "Extrude Region",
+      1
+    ],
+    [
+      "Cylinder.001",
+      2,
+      "Extrude Region",
+      2
+    ],
+    [
+      "Matrix In.004",
+      0,
+      "Extrude Region",
+      4
+    ],
+    [
+      "Extrude Region",
+      5,
+      "List Length",
+      0
+    ],
+    [
+      "Scalar Math.001",
+      0,
+      "Matrix In.006",
+      0
+    ],
+    [
+      "Number Range",
+      0,
+      "Scalar Math.001",
+      0
+    ],
+    [
+      "List Length",
+      0,
+      "Number Range",
+      2
+    ],
+    [
+      "Extrude Separate Faces",
+      0,
+      "Mesh viewer.001",
+      0
+    ],
+    [
+      "Extrude Separate Faces",
+      1,
+      "Mesh viewer.001",
+      1
+    ],
+    [
+      "List Join",
+      0,
+      "Mesh viewer.001",
+      2
+    ],
+    [
+      "List Join",
+      0,
+      "Stethoscope MK2.002",
+      0
+    ],
+    [
+      "Extrude Region",
+      5,
+      "List Item",
+      0
+    ],
+    [
+      "Number Range",
+      0,
+      "List Item",
+      1
+    ],
+    [
+      "Extrude Region",
+      0,
+      "Extrude Separate Faces",
+      0
+    ],
+    [
+      "Extrude Region",
+      1,
+      "Extrude Separate Faces",
+      1
+    ],
+    [
+      "List Item",
+      0,
+      "Extrude Separate Faces",
+      2
+    ],
+    [
+      "Matrix In.005",
+      0,
+      "Extrude Separate Faces",
+      6
+    ],
+    [
+      "Extrude Separate Faces",
+      2,
+      "List Join",
+      0
+    ],
+    [
+      "Extrude Region",
+      2,
+      "List Join",
+      1
+    ],
+    [
+      "Extrude Region",
+      0,
+      "Mesh Join",
+      0
+    ]
+  ]
+}
