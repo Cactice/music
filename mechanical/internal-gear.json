@@ -1,0 +1,312 @@
+{
+  "export_version": "0.10",
+  "framed_nodes": {},
+  "groups": {},
+  "nodes": {
+    "Cylinder.001": {
+      "bl_idname": "SvCylinderNodeMK2",
+      "color": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "custom_socket_props": {},
+      "height": 2.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        -855.069580078125,
+        -5.03271484375
+      ],
+      "params": {
+        "cap_bottom": false,
+        "cap_top": false,
+        "center": false,
+        "height": 2.0,
+        "meridians": 20,
+        "radius_b": 10.0,
+        "radius_t": 10.0
+      },
+      "use_custom_color": true,
+      "width": 140.0
+    },
+    "Extrude Region": {
+      "bl_idname": "SvExtrudeRegionNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        -645.6746826171875,
+        -145.9215087890625
+      ],
+      "params": {
+        "mask_out_type": [
+          "in"
+        ]
+      },
+      "width": 140.0
+    },
+    "Extrude Separate Faces": {
+      "bl_idname": "SvExtrudeSeparateNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        305.06536865234375,
+        123.0927734375
+      ],
+      "params": {
+        "extrude_mode": "MATRIX",
+        "height_": 0.46000006794929504
+      },
+      "width": 140.0
+    },
+    "List Item": {
+      "bl_idname": "SvListItemNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        96.9119873046875,
+        -417.162353515625
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "List Join": {
+      "bl_idname": "ListJoinNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        600.7865600585938,
+        -176.10595703125
+      ],
+      "params": {
+        "JoinLevel": 2
+      },
+      "width": 140.0
+    },
+    "List Length": {
+      "bl_idname": "ListLengthNode",
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        -285.66827392578125,
+        -422.69873046875
+      ],
+      "params": {},
+      "width": 140.0
+    },
+    "Matrix In.004": {
+      "bl_idname": "SvMatrixInNodeMK4",
+      "custom_socket_props": {
+        "1": {
+          "expanded": true
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        -875.069580078125,
+        -465.03271484375
+      ],
+      "params": {
+        "scale": [
+          0.8999999761581421,
+          0.8999999761581421,
+          1.0
+        ]
+      },
+      "width": 140.0
+    },
+    "Matrix In.005": {
+      "bl_idname": "SvMatrixInNodeMK4",
+      "custom_socket_props": {
+        "0": {
+          "expanded": true
+        },
+        "1": {
+          "expanded": true
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        -193.2103271484375,
+        383.636474609375
+      ],
+      "params": {
+        "location_": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "scale": [
+          0.800000011920929,
+          1.0,
+          1.0
+        ]
+      },
+      "width": 140.0
+    },
+    "Mesh viewer.001": {
+      "bl_idname": "SvMeshViewer",
+      "color": [
+        1.0,
+        0.5889999866485596,
+        0.21400000154972076
+      ],
+      "custom_socket_props": {},
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        863.8108520507812,
+        295.4189453125
+      ],
+      "params": {
+        "selectable_objects": false
+      },
+      "use_custom_color": true,
+      "width": 140.0
+    },
+    "Number Range": {
+      "bl_idname": "SvGenNumberRange",
+      "custom_socket_props": {
+        "1": {
+          "label": "step"
+        },
+        "2": {
+          "label": "count"
+        }
+      },
+      "height": 100.0,
+      "hide": false,
+      "label": "",
+      "location": [
+        -110.8883056640625,
+        -409.814208984375
+      ],
+      "params": {
+        "current_mode": "RANGE_STEP",
+        "number_mode": "int",
+        "range_mode": "RANGE_STEP",
+        "step_int": 2
+      },
+      "width": 140.0
+    }
+  },
+  "update_lists": [
+    [
+      "Cylinder.001",
+      0,
+      "Extrude Region",
+      0
+    ],
+    [
+      "Cylinder.001",
+      1,
+      "Extrude Region",
+      1
+    ],
+    [
+      "Cylinder.001",
+      2,
+      "Extrude Region",
+      2
+    ],
+    [
+      "Matrix In.004",
+      0,
+      "Extrude Region",
+      4
+    ],
+    [
+      "Extrude Region",
+      0,
+      "Extrude Separate Faces",
+      0
+    ],
+    [
+      "Extrude Region",
+      1,
+      "Extrude Separate Faces",
+      1
+    ],
+    [
+      "List Item",
+      0,
+      "Extrude Separate Faces",
+      2
+    ],
+    [
+      "Matrix In.005",
+      0,
+      "Extrude Separate Faces",
+      6
+    ],
+    [
+      "Extrude Region",
+      5,
+      "List Item",
+      0
+    ],
+    [
+      "Number Range",
+      0,
+      "List Item",
+      1
+    ],
+    [
+      "Extrude Separate Faces",
+      2,
+      "List Join",
+      0
+    ],
+    [
+      "Extrude Region",
+      2,
+      "List Join",
+      1
+    ],
+    [
+      "Extrude Region",
+      5,
+      "List Length",
+      0
+    ],
+    [
+      "Extrude Separate Faces",
+      0,
+      "Mesh viewer.001",
+      0
+    ],
+    [
+      "Extrude Separate Faces",
+      1,
+      "Mesh viewer.001",
+      1
+    ],
+    [
+      "List Join",
+      0,
+      "Mesh viewer.001",
+      2
+    ],
+    [
+      "List Length",
+      0,
+      "Number Range",
+      2
+    ]
+  ]
+}
