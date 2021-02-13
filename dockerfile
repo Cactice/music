@@ -1,14 +1,16 @@
-FROM python:3.8-slim as builder
-WORKDIR /usr/src/app
+FROM nytimes/blender:2.91-cpu-ubuntu18.04 as dev
+RUN apt-get update && apt-get install -y git
 RUN pip install poetry
+ENV PATH="/bin/2.91/python/bi:${PATH}"
+ENV PATH="/usr/src/app/.venv/bin:${PATH}"
+WORKDIR /usr/src/app
 COPY pyproject.toml poetry.lock ./
+RUN poetry config virtualenvs.in-project true && \
+  poetry install
 RUN poetry export -f requirements.txt > requirements.txt
 
-FROM 2.91-cpu-ubuntu18.04
-ENV PYTHONUNBUFFERED=1
-WORKDIR /usr/src/app
-COPY --from=builder /usr/src/app/requirements.txt .
-RUN pip install -r requirements.txt
-COPY . .
-EXPOSE 8000
-CMD [ "uvicorn", "main:app", "--host", "0.0.0.0" ]
+# FROM nytimes/blender:2.91-cpu-ubuntu18.04 as prod
+# ENV PYTHONUNBUFFERED=1
+# WORKDIR /usr/src/app
+# COPY --from=builder /usr/src/app/requirements.txt .
+# RUN pip install -r requirements.txt
