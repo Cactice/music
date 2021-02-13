@@ -1,0 +1,22 @@
+{
+  "name": "Python Project",
+  "dockerComposeFile":"../docker-compose.yml",
+  "service": "blender",
+  "workspaceFolder": "/usr/src/app",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash",
+      "python.pythonPath": "../.venv/bin/python",
+      "python.linting.enabled": true,
+      "python.linting.pylintEnabled": false,
+      "python.linting.flake8Enabled": true,
+      "python.linting.mypyEnabled": true,
+      "python.formatting.provider": "black",
+      "[python]": {
+          "editor.formatOnSave": true
+      }
+  },
+  "extensions": [
+      "ms-python.python",
+  ],
+  "shutdownAction": "stopCompose"
+}
