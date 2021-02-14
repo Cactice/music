@@ -3,9 +3,14 @@ Converts a given json to glb file.
 
 This file should be able to process both .blender and sverchok generated .json files
 """
+import os
+from time import sleep
+
 import bpy
 from sverchok.utils.logging import debug
 from sverchok.utils.sv_json_import import JSONImporter
+
+path = os.path
 
 
 class _ExistingTreeError(Exception):
@@ -100,6 +105,17 @@ def _create_node_tree(
     return bpy.data.node_groups.new(name=name, type="SverchCustomTreeType")
 
 
-JSONImporter.init_from_path(
-    "/home/yuya/git/blender-sverchok-practice/sverchok/mechanical/gear.json",
-).import_into_tree(_create_node_tree())
+def _main():
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    JSONImporter.init_from_path(
+        path.join(current_dir, "sverchok/mechanical/ellipese-draw.json"),
+    ).import_into_tree(_create_node_tree())
+    for bpy_obj in bpy.context.scene.objects:
+        if bpy_obj.name in {"Light", "Camera"}:
+            continue
+        _bake_animation()
+    bpy.ops.export_scene.gltf(filepath=path.join(current_dir, "lol.glb"))
+
+
+if __name__ == "__main__":
+    _main()
