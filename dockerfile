@@ -1,3 +1,4 @@
+# python 3.7
 FROM nytimes/blender:2.91-cpu-ubuntu18.04 as dev
 RUN apt-get update && apt-get install -y git
 RUN pip install poetry

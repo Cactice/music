@@ -8,6 +8,7 @@ authors = ["cactice <14835424+Cactice@users.noreply.github.com>"]
 python = "^3.7"
 
 [tool.poetry.dev-dependencies]
+wemake-python-styleguide = "^0.15.1"
 "fake-bpy-module-2.91" = "^20201216"
 flake8 = "^3.8.4"
 black = "^20.8b1"
