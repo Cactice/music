@@ -1,5 +1,5 @@
 """
-Converts a given json to glb file.
+Converts a given json or .blender to glb file.
 
 This file should be able to process both .blender and sverchok generated .json files
 """
@@ -26,14 +26,14 @@ class _ExistingTreeError(Exception):
         self.message = message
 
 
-def _prepare_bake_keyframe(act_frame):
+def _prepare_bake_keyframe(act_frame: int):
     bpy.context.scene.frame_current = act_frame
     bpy.ops.node.sverchok_update_all()
     bpy.ops.object.join_shapes()
     bpy.context.object.active_shape_key_index = act_frame - 1
 
 
-def _bake_frame(act_frame):
+def _bake_frame(act_frame: int):
     _prepare_bake_keyframe(act_frame)
     active_object = bpy.context.active_object
     keys_name = active_object.data.shape_keys.name
@@ -55,6 +55,7 @@ def _bake_animation(original_obj: bpy.types.Object):
     original_name = bpy.context.active_object.name
     first_frame = bpy.context.scene.frame_start
     end_frame = bpy.context.scene.frame_end
+
     bpy.context.scene.frame_current = first_frame
     bpy.ops.node.sverchok_update_all()
     bpy.ops.object.duplicate()
@@ -62,6 +63,7 @@ def _bake_animation(original_obj: bpy.types.Object):
     bpy.context.active_object.data.name = f"Baked_{original_name}"
     bpy.data.objects[original_name].select_set(state=True)
     bpy.ops.object.join_shapes()
+
     for act_frame in range(first_frame + 1, end_frame + 1):
         _bake_frame(act_frame)
 
