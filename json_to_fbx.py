@@ -69,7 +69,7 @@ def _bake_animation():
 def _create_node_tree(
     name="TestingTree",
     must_not_exist=True,
-) -> bpy.BlendDataNodeTrees:
+) -> bpy.types.BlendDataNodeTrees:
     """
     Create new Sverchok node tree in the scene.
 

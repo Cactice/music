@@ -2,7 +2,7 @@
 FROM nytimes/blender:2.91-cpu-ubuntu18.04 as dev
 RUN apt-get update && apt-get install -y git
 RUN pip install poetry
-ENV PATH="/bin/2.91/python/bi:${PATH}"
+ENV PATH="/bin/2.91/python/bin:${PATH}"
 ENV PATH="/usr/src/app/.venv/bin:${PATH}"
 WORKDIR /usr/src/app
 COPY pyproject.toml poetry.lock ./
