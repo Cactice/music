@@ -49,7 +49,9 @@ def _bake_frame(act_frame):
     key.keyframe_insert(data_path=f'key_blocks["{name}"].value')
 
 
-def _bake_animation():
+def _bake_animation(original_obj: bpy.types.Object):
+    bpy.context.view_layer.objects.active = original_obj
+    original_obj.select_set(True)
     original_name = bpy.context.active_object.name
     first_frame = bpy.context.scene.frame_start
     end_frame = bpy.context.scene.frame_end
@@ -103,10 +105,13 @@ def _main():
     JSONImporter.init_from_path(
         path.join(current_dir, "sverchok/mechanical/ellipese-draw.json"),
     ).import_into_tree(_create_node_tree())
-    # for bpy_obj in bpy.context.scene.objects:
-    #     if bpy_obj.name in {"Light", "Camera"}:
-    #         continue
-    #     _bake_animation(bpy_obj)
+    # TODO: Fix duplicate generation
+    all_objs = bpy.context.scene.objects.items().copy()
+    for name, each_obj in all_objs:
+        if name in {"Light", "Camera"}:
+            continue
+        _bake_animation(each_obj)
+    # TODO : Add code for gltf export
     # bpy.ops.export_scene.gltf(filepath=path.join(current_dir, "lol.glb"))
 
 
