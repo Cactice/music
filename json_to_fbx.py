@@ -65,6 +65,9 @@ def _bake_animation(original_obj: bpy.types.Object):
     for act_frame in range(first_frame + 1, end_frame + 1):
         _bake_frame(act_frame)
 
+    bpy.ops.object.select_all(action="DESELECT")
+    bpy.context.view_layer.objects.active = None
+
 
 def _create_node_tree(
     name="TestingTree",
@@ -105,14 +108,12 @@ def _main():
     JSONImporter.init_from_path(
         path.join(current_dir, "sverchok/mechanical/ellipese-draw.json"),
     ).import_into_tree(_create_node_tree())
-    # TODO: Fix duplicate generation
     all_objs = bpy.context.scene.objects.items().copy()
     for name, each_obj in all_objs:
         if name in {"Light", "Camera"}:
             continue
         _bake_animation(each_obj)
-    # TODO : Add code for gltf export
-    # bpy.ops.export_scene.gltf(filepath=path.join(current_dir, "lol.glb"))
+    bpy.ops.export_scene.gltf(filepath=path.join(current_dir, "lol.glb"))
 
 
 if __name__ == "__main__":
