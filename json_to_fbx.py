@@ -63,12 +63,32 @@ def _bake_animation():
     bpy.context.scene.frame_current = first_frame
     bpy.ops.node.sverchok_update_all()
     bpy.ops.object.duplicate()
-    bpy.context.active_object.name = f"Baked_{original_name}"
-    bpy.context.active_object.data.name = f"Baked_{original_name}"
+    bpy.context.active_object.name = "Baked_" + original_name
+    bpy.context.active_object.data.name = "Baked_" + original_name
     bpy.data.objects[original_name].select_set(state=True)
     bpy.ops.object.join_shapes()
-    for act_frame in range(first_frame + 1, end_frame + 1):
-        _bake_frame(act_frame)
+    for actFrame in range(first_frame + 1, end_frame + 1):
+        bpy.context.scene.frame_current = actFrame
+        bpy.ops.node.sverchok_update_all()
+        bpy.ops.object.join_shapes()
+        bpy.context.object.active_shape_key_index = actFrame - 1
+        keys_name = bpy.context.object.data.shape_keys.name
+        k = bpy.data.shape_keys[keys_name]
+        k.key_blocks[-1].value = 1
+        name = bpy.data.shape_keys[keys_name].key_blocks[-1].name
+        bpy.data.shape_keys[keys_name].keyframe_insert(
+            data_path='key_blocks["' + name + '"].value'
+        )
+        k.key_blocks[-2].value = 0
+        name_p = bpy.data.shape_keys[keys_name].key_blocks[-2].name
+        bpy.data.shape_keys[keys_name].keyframe_insert(
+            data_path='key_blocks["' + name_p + '"].value'
+        )
+        bpy.context.scene.frame_current = actFrame - 1
+        k.key_blocks[-1].value = 0
+        bpy.data.shape_keys[keys_name].keyframe_insert(
+            data_path='key_blocks["' + name + '"].value'
+        )
 
 
 def _create_node_tree(
@@ -110,11 +130,11 @@ def _main():
     JSONImporter.init_from_path(
         path.join(current_dir, "sverchok/mechanical/ellipese-draw.json"),
     ).import_into_tree(_create_node_tree())
-    for bpy_obj in bpy.context.scene.objects:
-        if bpy_obj.name in {"Light", "Camera"}:
-            continue
-        _bake_animation()
-    bpy.ops.export_scene.gltf(filepath=path.join(current_dir, "lol.glb"))
+    # for bpy_obj in bpy.context.scene.objects:
+    #     if bpy_obj.name in {"Light", "Camera"}:
+    #         continue
+    #     _bake_animation(bpy_obj)
+    # bpy.ops.export_scene.gltf(filepath=path.join(current_dir, "lol.glb"))
 
 
 if __name__ == "__main__":
