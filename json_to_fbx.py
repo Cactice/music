@@ -35,23 +35,18 @@ def _prepare_bake_keyframe(act_frame):
 
 def _bake_frame(act_frame):
     _prepare_bake_keyframe(act_frame)
-    keys_name = bpy.context.object.data.shape_keys.name
+    active_object = bpy.context.active_object
+    keys_name = active_object.data.shape_keys.name
     key = bpy.data.shape_keys[keys_name]
     key.key_blocks[-1].value = 1
-    name = bpy.data.shape_keys[keys_name].key_blocks[-1].name
-    bpy.data.shape_keys[keys_name].keyframe_insert(
-        data_path=f'key_blocks["{name}"].value'
-    )
+    name = key.key_blocks[-1].name
+    key.keyframe_insert(data_path=f'key_blocks["{name}"].value')
     key.key_blocks[-2].value = 0
-    name_p = bpy.data.shape_keys[keys_name].key_blocks[-2].name
-    bpy.data.shape_keys[keys_name].keyframe_insert(
-        data_path=f'key_blocks["{name_p}"].value'
-    )
+    name_p = key.key_blocks[-2].name
+    key.keyframe_insert(data_path=f'key_blocks["{name_p}"].value')
     bpy.context.scene.frame_current = act_frame - 1
     key.key_blocks[-1].value = 0
-    bpy.data.shape_keys[keys_name].keyframe_insert(
-        data_path=f'key_blocks["{name}"].value'
-    )
+    key.keyframe_insert(data_path=f'key_blocks["{name}"].value')
 
 
 def _bake_animation():
@@ -61,8 +56,8 @@ def _bake_animation():
     bpy.context.scene.frame_current = first_frame
     bpy.ops.node.sverchok_update_all()
     bpy.ops.object.duplicate()
-    bpy.context.active_object.name = "Baked_" + original_name
-    bpy.context.active_object.data.name = "Baked_" + original_name
+    bpy.context.active_object.name = f"Baked_{original_name}"
+    bpy.context.active_object.data.name = f"Baked_{original_name}"
     bpy.data.objects[original_name].select_set(state=True)
     bpy.ops.object.join_shapes()
     for act_frame in range(first_frame + 1, end_frame + 1):
