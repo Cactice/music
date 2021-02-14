@@ -27,32 +27,30 @@ class _ExistingTreeError(Exception):
 
 
 def _prepare_bake_keyframe(act_frame):
-    scene = bpy.context.scene
-    scene.frame_current = act_frame
+    bpy.context.scene.frame_current = act_frame
     bpy.ops.node.sverchok_update_all()
     bpy.ops.object.join_shapes()
+    bpy.context.object.active_shape_key_index = act_frame - 1
 
 
 def _bake_frame(act_frame):
     _prepare_bake_keyframe(act_frame)
-    bpy_obj = bpy.context.object
-    bpy_obj.active_shape_key_index = act_frame - 1
-    keys_name = bpy_obj.data.shape_keys.name
+    keys_name = bpy.context.object.data.shape_keys.name
     key = bpy.data.shape_keys[keys_name]
-    name = key.key_blocks[-2].name
     key.key_blocks[-1].value = 1
-    key.keyframe_insert(
-        data_path=f"key_blocks['{name}'].value",
+    name = bpy.data.shape_keys[keys_name].key_blocks[-1].name
+    bpy.data.shape_keys[keys_name].keyframe_insert(
+        data_path=f'key_blocks["{name}"].value'
     )
-    key.key_blocks[-3].value = 0
-    name_p = key.key_blocks[-3].name
-    key.keyframe_insert(
-        data_path=f"key_blocks['{name_p}'].value",
-    )
-    bpy.context.scene.frame_current = act_frame
     key.key_blocks[-2].value = 0
-    key.keyframe_insert(
-        data_path=f"key_blocks['{name_p}'].value",
+    name_p = bpy.data.shape_keys[keys_name].key_blocks[-2].name
+    bpy.data.shape_keys[keys_name].keyframe_insert(
+        data_path=f'key_blocks["{name_p}"].value'
+    )
+    bpy.context.scene.frame_current = act_frame - 1
+    key.key_blocks[-1].value = 0
+    bpy.data.shape_keys[keys_name].keyframe_insert(
+        data_path=f'key_blocks["{name}"].value'
     )
 
 
@@ -67,28 +65,8 @@ def _bake_animation():
     bpy.context.active_object.data.name = "Baked_" + original_name
     bpy.data.objects[original_name].select_set(state=True)
     bpy.ops.object.join_shapes()
-    for actFrame in range(first_frame + 1, end_frame + 1):
-        bpy.context.scene.frame_current = actFrame
-        bpy.ops.node.sverchok_update_all()
-        bpy.ops.object.join_shapes()
-        bpy.context.object.active_shape_key_index = actFrame - 1
-        keys_name = bpy.context.object.data.shape_keys.name
-        k = bpy.data.shape_keys[keys_name]
-        k.key_blocks[-1].value = 1
-        name = bpy.data.shape_keys[keys_name].key_blocks[-1].name
-        bpy.data.shape_keys[keys_name].keyframe_insert(
-            data_path='key_blocks["' + name + '"].value'
-        )
-        k.key_blocks[-2].value = 0
-        name_p = bpy.data.shape_keys[keys_name].key_blocks[-2].name
-        bpy.data.shape_keys[keys_name].keyframe_insert(
-            data_path='key_blocks["' + name_p + '"].value'
-        )
-        bpy.context.scene.frame_current = actFrame - 1
-        k.key_blocks[-1].value = 0
-        bpy.data.shape_keys[keys_name].keyframe_insert(
-            data_path='key_blocks["' + name + '"].value'
-        )
+    for act_frame in range(first_frame + 1, end_frame + 1):
+        _bake_frame(act_frame)
 
 
 def _create_node_tree(
