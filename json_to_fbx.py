@@ -35,14 +35,16 @@ def _prepare_bake_keyframe(act_frame: int):
 
 def _bake_frame(act_frame: int):
     _prepare_bake_keyframe(act_frame)
+
     active_object = bpy.context.active_object
     keys_name = active_object.data.shape_keys.name
     key = bpy.data.shape_keys[keys_name]
-    key.key_blocks[-1].value = 1
     name = key.key_blocks[-1].name
+    name_p = key.key_blocks[-2].name
+
+    key.key_blocks[-1].value = 1
     key.keyframe_insert(data_path=f'key_blocks["{name}"].value')
     key.key_blocks[-2].value = 0
-    name_p = key.key_blocks[-2].name
     key.keyframe_insert(data_path=f'key_blocks["{name_p}"].value')
     bpy.context.scene.frame_current = act_frame - 1
     key.key_blocks[-1].value = 0
