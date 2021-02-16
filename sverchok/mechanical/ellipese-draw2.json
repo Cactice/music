@@ -401,6 +401,7 @@
         723.6423950195312
       ],
       "params": {
+        "is_merge": true,
         "selectable_objects": false
       },
       "use_custom_color": true,
@@ -423,6 +424,7 @@
       ],
       "params": {
         "base_data_name": "Beta",
+        "is_merge": true,
         "selectable_objects": false
       },
       "use_custom_color": true,
@@ -711,6 +713,30 @@
       0
     ],
     [
+      "Frame info.001",
+      0,
+      "Map Range",
+      0
+    ],
+    [
+      "Frame info.001",
+      0,
+      "Map Range.001",
+      0
+    ],
+    [
+      "Scalar Math.002",
+      0,
+      "Matrix In",
+      0
+    ],
+    [
+      "Scalar Math.003",
+      0,
+      "Matrix In",
+      7
+    ],
+    [
       "Extrude Separate Faces",
       0,
       "Mesh viewer.001",
@@ -727,78 +753,6 @@
       0,
       "Mesh viewer.001",
       2
-    ],
-    [
-      "List Length",
-      0,
-      "Number Range",
-      2
-    ],
-    [
-      "List Length.001",
-      0,
-      "Number Range.001",
-      2
-    ],
-    [
-      "Frame info.001",
-      0,
-      "Map Range",
-      0
-    ],
-    [
-      "Frame info.001",
-      0,
-      "Map Range.001",
-      0
-    ],
-    [
-      "Map Range",
-      0,
-      "Scalar Math",
-      0
-    ],
-    [
-      "Map Range",
-      0,
-      "Scalar Math.001",
-      0
-    ],
-    [
-      "Vector in",
-      0,
-      "Scalar Math.002",
-      0
-    ],
-    [
-      "Map Range.001",
-      0,
-      "Scalar Math.003",
-      0
-    ],
-    [
-      "Scalar Math",
-      0,
-      "Vector in",
-      0
-    ],
-    [
-      "Scalar Math.001",
-      0,
-      "Vector in",
-      1
-    ],
-    [
-      "Scalar Math.002",
-      0,
-      "Matrix In",
-      0
-    ],
-    [
-      "Scalar Math.003",
-      0,
-      "Matrix In",
-      7
     ],
     [
       "Extrude Separate Faces.001",
@@ -823,6 +777,54 @@
       0,
       "Mesh viewer.002",
       4
+    ],
+    [
+      "List Length",
+      0,
+      "Number Range",
+      2
+    ],
+    [
+      "List Length.001",
+      0,
+      "Number Range.001",
+      2
+    ],
+    [
+      "Map Range",
+      0,
+      "Scalar Math",
+      0
+    ],
+    [
+      "Map Range",
+      0,
+      "Scalar Math.001",
+      0
+    ],
+    [
+      "Vector in",
+      0,
+      "Scalar Math.002",
+      0
+    ],
+    [
+      "Map Range.001",
+      0,
+      "Scalar Math.003",
+      0
+    ],
+    [
+      "Scalar Math",
+      0,
+      "Vector in",
+      0
+    ],
+    [
+      "Scalar Math.001",
+      0,
+      "Vector in",
+      1
     ]
   ]
 }
