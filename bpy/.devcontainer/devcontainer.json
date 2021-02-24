@@ -1,6 +1,6 @@
 {
   "name": "Python Project",
-  "dockerComposeFile":"../docker-compose.yml",
+  "dockerComposeFile":"../../docker-compose.yml",
   "service": "blender",
   "workspaceFolder": "/usr/src/app",
   "settings": {
