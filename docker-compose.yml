@@ -5,5 +5,5 @@ services:
       context: ./bpy
       target: dev
     volumes:
-    - ./:/usr/src/app
+    - ./bpy:/usr/src/app
     command: /bin/sh -c "while sleep 1000; do :; done"
