@@ -5,5 +5,6 @@ services:
       context: ./bpy
       target: dev
     volumes:
-    - ./bpy:/usr/src/app
+    - ./:/usr/src/app
+    - ./bpy/.venv:/usr/src/app/.venv # workaround
     command: /bin/sh -c "while sleep 1000; do :; done"
