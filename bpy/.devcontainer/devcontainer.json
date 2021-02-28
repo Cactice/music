@@ -2,10 +2,10 @@
   "name": "Python Project",
   "dockerComposeFile":"../../docker-compose.yml",
   "service": "blender",
-  "workspaceFolder": "/usr/src/app",
+  "workspaceFolder": "/usr/src/dev/bpy",
   "settings": {
     "terminal.integrated.shell.linux": "/bin/bash",
-      "python.pythonPath": "../.venv/bin/python",
+      "python.pythonPath": "/usr/src/dev/bpy/.venv/bin/python",
       "python.linting.enabled": true,
       "python.linting.pylintEnabled": false,
       "python.linting.flake8Enabled": true,
@@ -20,5 +20,6 @@
       "jacqueslucke.blender-development",
       "ms-azuretools.vscode-docker"
   ],
-  "shutdownAction": "stopCompose"
+  "shutdownAction": "stopCompose",
+  "postAttachCommand": "cp -r /usr/src/app/.venv/ /usr/src/dev/bpy &"
 }

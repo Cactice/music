@@ -4,11 +4,11 @@ Converts a given json or .blender to glb file.
 This file should be able to process both .blender and sverchok generated .json files
 """
 import os
-from time import sleep
 
-import bpy
 from sverchok.utils.logging import debug
 from sverchok.utils.sv_json_import import JSONImporter
+
+import bpy
 
 path = os.path
 
@@ -90,7 +90,8 @@ def _create_node_tree(
             the tree with such name did not exist before. If it exists,
             an exception is raised.
             If must_not_exist == False, then new tree will be created anyway,
-            but it can be created with another name (standard Blender's renaming)
+            but it can be created with another name
+            (standard Blender's renaming)
 
     Raises:
         _ExistingTreeError: Tree name already existed

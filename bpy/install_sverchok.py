@@ -4,8 +4,9 @@ Download and install sverchok to blender.
 This module downloads zipped sverchock module
 and installs it.
 """
-import bpy
 import requests
+
+import bpy
 
 
 def _download_url(url: str, save_path: str, chunk_size=128):
