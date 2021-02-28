@@ -17,7 +17,8 @@
   },
   "extensions": [
       "ms-python.python",
-      "jacqueslucke.blender-development"
+      "jacqueslucke.blender-development",
+      "ms-azuretools.vscode-docker"
   ],
   "shutdownAction": "stopCompose"
 }
