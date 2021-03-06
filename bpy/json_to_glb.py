@@ -111,7 +111,7 @@ def _create_node_tree(
 def _main():
     current_dir = os.path.dirname(os.path.realpath(__file__))
     JSONImporter.init_from_path(
-        path.join(current_dir, "sverchok/mechanical/ellipese-draw2.json"),
+        path.join(current_dir, "../sverchok/mechanical/ellipese-draw2.json"),
     ).import_into_tree(_create_node_tree())
     all_objs = bpy.context.scene.objects.items().copy()
     for name, each_obj in all_objs:
