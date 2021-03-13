@@ -1,0 +1,13 @@
+{
+  "name": "Next Project",
+  "dockerComposeFile":"../../docker-compose.yml",
+  "service": "next",
+  "workspaceFolder": "/usr/src/dev/next",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash",
+  },
+  "extensions": [
+      "ms-azuretools.vscode-docker"
+  ],
+  "shutdownAction": "stopCompose",
+}
