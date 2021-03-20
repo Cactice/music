@@ -8,10 +8,6 @@ WORKDIR /usr/src/app
 COPY pyproject.toml poetry.lock ./
 RUN poetry config virtualenvs.in-project true && \
   poetry install
-RUN poetry export -f requirements.txt > requirements.txt
-
-# FROM nytimes/blender:2.91-cpu-ubuntu18.04 as prod
-# ENV PYTHONUNBUFFERED=1
-# WORKDIR /usr/src/app
-# COPY --from=builder /usr/src/app/requirements.txt .
-# RUN pip install -r requirements.txt
+WORKDIR /usr/src/dev/bpy
+RUN cp -r .venv/* /bin/2.91/python/
+RUN blender -P install_sverchok.py -b

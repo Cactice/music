@@ -1,16 +1,22 @@
 """
 Converts a given json or .blender to glb file.
 
+Execution Script:
+blender -P json_to_glb.py -b -- ../sverchok/mechanical/ellipese-draw.json
+
 This file should be able to process both .blender and sverchok generated .json files
 """
 import os
+from pathlib import Path
 
+import click
 from sverchok.utils.logging import debug
 from sverchok.utils.sv_json_import import JSONImporter
 
 import bpy
 
 path = os.path
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 
 class _ExistingTreeError(Exception):
@@ -108,17 +114,30 @@ def _create_node_tree(
     return bpy.data.node_groups.new(name=name, type="SverchCustomTreeType")
 
 
-def _main():
-    current_dir = os.path.dirname(os.path.realpath(__file__))
-    JSONImporter.init_from_path(
-        path.join(current_dir, "../sverchok/mechanical/ellipese-draw2.json"),
-    ).import_into_tree(_create_node_tree())
+def _import_json(json_file):
+    JSONImporter.init_from_path(json_file).import_into_tree(_create_node_tree())
+
+
+@click.command()
+@click.argument("input_file")
+def _main(input_file):
+    extension = path.splitext(input_file)[1]
+    file_name = fileNamepath.basename(input_file)
+    if extension == "json":
+        _import_json(input_file)
+    elif extension == "blender":
+        bpy.ops.wm.open_mainfile(filepath=input_file)
+
+    # bake animation for all objs
     all_objs = bpy.context.scene.objects.items().copy()
     for name, each_obj in all_objs:
         if name in {"Light", "Camera"}:
             continue
         _bake_animation(each_obj)
-    bpy.ops.export_scene.gltf(filepath=path.join(current_dir, "lol.glb"))
+
+    bpy.ops.export_scene.gltf(
+        filepath=path.join(current_dir, f"output/{file_name}.glb")
+    )
 
 
 if __name__ == "__main__":
