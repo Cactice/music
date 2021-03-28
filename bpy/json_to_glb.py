@@ -2,7 +2,7 @@
 Converts a given json or .blender to glb file.
 
 Execution Script:
-blender -P json_to_glb.py -b -- ../sverchok/mechanical/ellipese-draw.json
+blender -P json_to_glb.py -b --input_file=../sverchok/mechanical/ellipese-draw.json
 
 This file should be able to process both .blender and sverchok generated .json files
 """
@@ -118,11 +118,19 @@ def _import_json(json_file):
     JSONImporter.init_from_path(json_file).import_into_tree(_create_node_tree())
 
 
-@click.command()
-@click.argument("input_file")
-def _main(input_file):
+@click.command(
+    context_settings={
+        "ignore_unknown_options": True,
+    },
+)
+@click.option(
+    "--input_file",
+    type=click.Path(exists=True),
+)
+@click.argument("blender_args", nargs=-1, type=click.UNPROCESSED)
+def _main(input_file, blender_args):
     extension = path.splitext(input_file)[1]
-    file_name = fileNamepath.basename(input_file)
+    file_name = path.splitext(path.basename(input_file))[0]
     if extension == "json":
         _import_json(input_file)
     elif extension == "blender":
@@ -136,7 +144,7 @@ def _main(input_file):
         _bake_animation(each_obj)
 
     bpy.ops.export_scene.gltf(
-        filepath=path.join(current_dir, f"output/{file_name}.glb")
+        filepath=path.join(current_dir, f"../output/{file_name}.glb"),
     )
 
 

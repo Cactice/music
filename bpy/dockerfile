@@ -6,8 +6,8 @@ ENV PATH="/bin/2.91/python/bin:${PATH}"
 ENV PATH="/usr/src/app/.venv/bin:${PATH}"
 WORKDIR /usr/src/app
 COPY pyproject.toml poetry.lock ./
-RUN poetry config virtualenvs.in-project true && \
-  poetry install
-WORKDIR /usr/src/dev/bpy
-RUN cp -r .venv/* /bin/2.91/python/
+RUN \
+poetry config virtualenvs.in-project true && \
+poetry install
+RUN cp -rf /usr/src/app/.venv/lib/* /bin/2.91/python/lib
 RUN blender -P install_sverchok.py -b
