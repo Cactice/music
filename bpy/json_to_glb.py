@@ -144,7 +144,7 @@ def _main(input_file, blender_args):
         _bake_animation(each_obj)
 
     bpy.ops.export_scene.gltf(
-        filepath=path.join(current_dir, f"../output/{file_name}.glb"),
+        filepath=path.join(current_dir, f"../next/public/glb/{file_name}.glb"),
     )
 
 
