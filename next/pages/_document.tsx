@@ -1,6 +1,6 @@
 
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-const GA_TRACKING_ID ='G-BJ9WESX2NS'
+const GA_TRACKING_ID = 'G-BJ9WESX2NS'
 export default class MyDocument extends Document {
   render() {
     return (
