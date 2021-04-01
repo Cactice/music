@@ -1,7 +1,10 @@
 import * as fs from "fs";
 import path from 'path';
+import { useRouter } from 'next/router'
+import { GetStaticProps } from "next";
+type ListProps = { fileNames: string[] }
 
-export const ModelPage = () => {
+const ModelPage = () => {
   const router = useRouter()
   const { fileName } = router.query
 
@@ -12,12 +15,17 @@ export const ModelPage = () => {
 export const getStaticPaths = async () => {
   const pagesDirectory = path.resolve(process.cwd(), 'pages');
   const fileNames = fs.readdirSync(path.join(pagesDirectory, '../public/glb'))
-  const paths = fileNames.map((fileName) => ({ params: { fileName }))
+  const paths = fileNames.map((fileName) => ({ params: { fileName } }))
   return {
     paths,
     fallback: false
   };
 }
-function useRouter() {
-  throw new Error("Function not implemented.");
+export const getStaticProps: GetStaticProps = async () => {
+  const pagesDirectory = path.resolve(process.cwd(), 'pages');
+  const fileNames = fs.readdirSync(path.join(pagesDirectory, '../public/glb'))
+  const props: ListProps = { fileNames }
+  return { props }
 }
+
+export default ModelPage

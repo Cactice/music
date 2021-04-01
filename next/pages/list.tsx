@@ -6,7 +6,7 @@ import path from 'path';
 type ListProps = { fileNames: string[] }
 
 export const List: FC<ListProps> = ({ fileNames }) => {
-  return <>{fileNames && fileNames.map((fileName) => <p>Post: {fileName}</p>)}</>
+  return <>{fileNames && fileNames.map((fileName) => <a href={`models/${fileName}`}>Post: {fileName}</a>)}</>
 }
 
 export const getStaticProps: GetStaticProps = async () => {
