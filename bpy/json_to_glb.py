@@ -2,7 +2,7 @@
 Converts a given json or .blender to glb file.
 
 Execution Script:
-blender -P json_to_glb.py -b --input_file=../sverchok/mechanical/ellipese-draw.json
+blender -P json_to_glb.py -b --input_file=../sverchok/mechanical/ellipese-draw.json empty.blend
 
 This file should be able to process both .blender and sverchok generated .json files
 """
