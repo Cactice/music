@@ -401,6 +401,7 @@
         295.4189453125
       ],
       "params": {
+        "is_merge": true,
         "selectable_objects": false
       },
       "use_custom_color": true,
@@ -423,6 +424,7 @@
       ],
       "params": {
         "base_data_name": "Beta",
+        "is_merge": true,
         "selectable_objects": false
       },
       "use_custom_color": true,
@@ -579,84 +581,6 @@
       4
     ],
     [
-      "Extrude Region",
-      0,
-      "Extrude Separate Faces",
-      0
-    ],
-    [
-      "Extrude Region",
-      1,
-      "Extrude Separate Faces",
-      1
-    ],
-    [
-      "List Item",
-      0,
-      "Extrude Separate Faces",
-      2
-    ],
-    [
-      "Matrix In.005",
-      0,
-      "Extrude Separate Faces",
-      6
-    ],
-    [
-      "Extrude Region",
-      5,
-      "List Item",
-      0
-    ],
-    [
-      "Number Range",
-      0,
-      "List Item",
-      1
-    ],
-    [
-      "Extrude Separate Faces",
-      2,
-      "List Join",
-      0
-    ],
-    [
-      "Extrude Region",
-      2,
-      "List Join",
-      1
-    ],
-    [
-      "Extrude Region",
-      5,
-      "List Length",
-      0
-    ],
-    [
-      "Extrude Separate Faces",
-      0,
-      "Mesh viewer.001",
-      0
-    ],
-    [
-      "Extrude Separate Faces",
-      1,
-      "Mesh viewer.001",
-      1
-    ],
-    [
-      "List Join",
-      0,
-      "Mesh viewer.001",
-      2
-    ],
-    [
-      "List Length",
-      0,
-      "Number Range",
-      2
-    ],
-    [
       "Cylinder.002",
       0,
       "Extrude Region.001",
@@ -679,6 +603,30 @@
       0,
       "Extrude Region.001",
       4
+    ],
+    [
+      "Extrude Region",
+      0,
+      "Extrude Separate Faces",
+      0
+    ],
+    [
+      "Extrude Region",
+      1,
+      "Extrude Separate Faces",
+      1
+    ],
+    [
+      "List Item",
+      0,
+      "Extrude Separate Faces",
+      2
+    ],
+    [
+      "Matrix In.005",
+      0,
+      "Extrude Separate Faces",
+      6
     ],
     [
       "Extrude Region.001",
@@ -705,6 +653,18 @@
       6
     ],
     [
+      "Extrude Region",
+      5,
+      "List Item",
+      0
+    ],
+    [
+      "Number Range",
+      0,
+      "List Item",
+      1
+    ],
+    [
       "Extrude Region.001",
       5,
       "List Item.001",
@@ -717,15 +677,81 @@
       1
     ],
     [
+      "Extrude Separate Faces",
+      2,
+      "List Join",
+      0
+    ],
+    [
+      "Extrude Region",
+      2,
+      "List Join",
+      1
+    ],
+    [
+      "Extrude Separate Faces.001",
+      2,
+      "List Join.001",
+      0
+    ],
+    [
+      "Extrude Region.001",
+      2,
+      "List Join.001",
+      1
+    ],
+    [
+      "Extrude Region",
+      5,
+      "List Length",
+      0
+    ],
+    [
       "Extrude Region.001",
       5,
       "List Length.001",
       0
     ],
     [
-      "List Length.001",
+      "Frame info",
       0,
-      "Number Range.001",
+      "Map Range",
+      0
+    ],
+    [
+      "Frame info",
+      0,
+      "Map Range.001",
+      0
+    ],
+    [
+      "Scalar Math.002",
+      0,
+      "Matrix In",
+      0
+    ],
+    [
+      "Scalar Math.003",
+      0,
+      "Matrix In",
+      7
+    ],
+    [
+      "Extrude Separate Faces",
+      0,
+      "Mesh viewer.001",
+      0
+    ],
+    [
+      "Extrude Separate Faces",
+      1,
+      "Mesh viewer.001",
+      1
+    ],
+    [
+      "List Join",
+      0,
+      "Mesh viewer.001",
       2
     ],
     [
@@ -753,34 +779,16 @@
       4
     ],
     [
-      "Extrude Separate Faces.001",
-      2,
-      "List Join.001",
-      0
-    ],
-    [
-      "Extrude Region.001",
-      2,
-      "List Join.001",
-      1
-    ],
-    [
-      "Scalar Math.002",
+      "List Length",
       0,
-      "Matrix In",
-      0
+      "Number Range",
+      2
     ],
     [
-      "Scalar Math.003",
+      "List Length.001",
       0,
-      "Matrix In",
-      7
-    ],
-    [
-      "Frame info",
-      0,
-      "Map Range.001",
-      0
+      "Number Range.001",
+      2
     ],
     [
       "Map Range",
@@ -795,18 +803,6 @@
       0
     ],
     [
-      "Scalar Math",
-      0,
-      "Vector in",
-      0
-    ],
-    [
-      "Scalar Math.001",
-      0,
-      "Vector in",
-      1
-    ],
-    [
       "Vector in",
       0,
       "Scalar Math.002",
@@ -819,10 +815,16 @@
       0
     ],
     [
-      "Frame info",
+      "Scalar Math",
       0,
-      "Map Range",
+      "Vector in",
       0
+    ],
+    [
+      "Scalar Math.001",
+      0,
+      "Vector in",
+      1
     ]
   ]
 }

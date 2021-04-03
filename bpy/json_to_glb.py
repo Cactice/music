@@ -18,6 +18,9 @@ import bpy
 path = os.path
 current_dir = os.path.dirname(os.path.realpath(__file__))
 
+first_frame = 0
+end_frame = 100
+
 
 class _ExistingTreeError(Exception):
     """Exception raised for errors when Tree exists.
@@ -61,8 +64,6 @@ def _bake_animation(original_obj: bpy.types.Object):
     bpy.context.view_layer.objects.active = original_obj
     original_obj.select_set(True)
     original_name = bpy.context.active_object.name
-    first_frame = bpy.context.scene.frame_start
-    end_frame = bpy.context.scene.frame_end
 
     bpy.context.scene.frame_current = first_frame
     bpy.ops.node.sverchok_update_all()
@@ -136,6 +137,8 @@ def _main(input_file, blender_args):
         _import_json(input_file)
     elif extension == ".blender":
         bpy.ops.wm.open_mainfile(filepath=input_file)
+        first_frame = bpy.context.scene.frame_start
+        end_frame = bpy.context.scene.frame_end
 
     # bake animation for all objs
     all_objs = bpy.context.scene.objects.items().copy()
@@ -143,9 +146,16 @@ def _main(input_file, blender_args):
         if name in {"Light", "Camera", "Cube"}:
             continue
         _bake_animation(each_obj)
+    # select baked
+    all_objs = bpy.context.scene.objects.items().copy()
+    bpy.ops.object.select_all(action="DESELECT")
+    for name, _each_obj in all_objs:
+        if name.startswith("Baked_"):
+            bpy.data.objects[name].select_set(True)
 
     bpy.ops.export_scene.gltf(
         filepath=path.join(current_dir, f"../next/public/glb/{file_name}.glb"),
+        export_selected=True,
     )
 
 
