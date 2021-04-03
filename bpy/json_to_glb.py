@@ -129,6 +129,7 @@ def _import_json(json_file):
 )
 @click.argument("blender_args", nargs=-1, type=click.UNPROCESSED)
 def _main(input_file, blender_args):
+    bpy.ops.wm.read_homefile(use_empty=True)
     extension = path.splitext(input_file)[1]
     file_name = path.splitext(path.basename(input_file))[0]
     if extension == ".json":
