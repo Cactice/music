@@ -15,12 +15,13 @@ interface ModelViewerJSX {
   src: string
   poster?: string
   'auto-rotate'?: boolean
+  'autoplay'?: boolean
   'camera-controls'?: boolean
   // ... others
 }
 
 export const Model: FC<{ fileName }> = ({ fileName }) => (
-  <model-viewer src={fileName} auto-rotate camera-controls />
+  <model-viewer src={fileName} camera-controls autoplay />
 )
 
 export default Model

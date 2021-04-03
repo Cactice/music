@@ -2,11 +2,13 @@
 Converts a given json or .blender to glb file.
 
 Execution Script:
-blender -P json_to_glb.py -b --input_file=../sverchok/mechanical/ellipese-draw.json empty.blend
+blender -P json_to_glb.py -b \
+--input_file=../sverchok/mechanical/ellipese-draw.json empty.blend
 
 This file should be able to process both .blender and sverchok generated .json files
 """
 import os
+import sys
 from pathlib import Path
 
 import click
@@ -17,9 +19,10 @@ import bpy
 
 path = os.path
 current_dir = os.path.dirname(os.path.realpath(__file__))
+if current_dir not in sys.path:
+    sys.path.append(current_dir)
 
-first_frame = 0
-end_frame = 100
+from bake_animation import bake_animation  # noqa: E402
 
 
 class _ExistingTreeError(Exception):
@@ -33,51 +36,6 @@ class _ExistingTreeError(Exception):
     def __init__(self, expression, message=""):
         self.expression = expression
         self.message = message
-
-
-def _prepare_bake_keyframe(act_frame: int):
-    bpy.context.scene.frame_current = act_frame
-    bpy.ops.node.sverchok_update_all()
-    bpy.ops.object.join_shapes()
-    bpy.context.object.active_shape_key_index = act_frame - 1
-
-
-def _bake_frame(act_frame: int):
-    _prepare_bake_keyframe(act_frame)
-
-    active_object = bpy.context.active_object
-    keys_name = active_object.data.shape_keys.name
-    key = bpy.data.shape_keys[keys_name]
-    name = key.key_blocks[-1].name
-    name_p = key.key_blocks[-2].name
-
-    key.key_blocks[-1].value = 1
-    key.keyframe_insert(data_path=f'key_blocks["{name}"].value')
-    key.key_blocks[-2].value = 0
-    key.keyframe_insert(data_path=f'key_blocks["{name_p}"].value')
-    bpy.context.scene.frame_current = act_frame - 1
-    key.key_blocks[-1].value = 0
-    key.keyframe_insert(data_path=f'key_blocks["{name}"].value')
-
-
-def _bake_animation(original_obj: bpy.types.Object):
-    bpy.context.view_layer.objects.active = original_obj
-    original_obj.select_set(True)
-    original_name = bpy.context.active_object.name
-
-    bpy.context.scene.frame_current = first_frame
-    bpy.ops.node.sverchok_update_all()
-    bpy.ops.object.duplicate()
-    bpy.context.active_object.name = f"Baked_{original_name}"
-    bpy.context.active_object.data.name = f"Baked_{original_name}"
-    bpy.data.objects[original_name].select_set(state=True)
-    bpy.ops.object.join_shapes()
-
-    for act_frame in range(first_frame + 1, end_frame + 1):
-        _bake_frame(act_frame)
-
-    bpy.ops.object.select_all(action="DESELECT")
-    bpy.context.view_layer.objects.active = None
 
 
 def _create_node_tree(
@@ -115,6 +73,14 @@ def _create_node_tree(
     return bpy.data.node_groups.new(name=name, type="SverchCustomTreeType")
 
 
+def _select_baked():
+    all_objs = bpy.context.scene.objects.items().copy()
+    bpy.ops.object.select_all(action="DESELECT")
+    for name, _each_obj in all_objs:
+        if name.startswith("Baked_"):
+            bpy.data.objects[name].select_set(True)
+
+
 def _import_json(json_file):
     JSONImporter.init_from_path(json_file).import_into_tree(_create_node_tree())
 
@@ -130,6 +96,8 @@ def _import_json(json_file):
 )
 @click.argument("blender_args", nargs=-1, type=click.UNPROCESSED)
 def _main(input_file, blender_args):
+    first_frame = 0
+    last_frame = 100
     bpy.ops.wm.read_homefile(use_empty=True)
     extension = path.splitext(input_file)[1]
     file_name = path.splitext(path.basename(input_file))[0]
@@ -138,20 +106,14 @@ def _main(input_file, blender_args):
     elif extension == ".blender":
         bpy.ops.wm.open_mainfile(filepath=input_file)
         first_frame = bpy.context.scene.frame_start
-        end_frame = bpy.context.scene.frame_end
+        last_frame = bpy.context.scene.frame_end
 
     # bake animation for all objs
     all_objs = bpy.context.scene.objects.items().copy()
     for name, each_obj in all_objs:
-        if name in {"Light", "Camera", "Cube"}:
-            continue
-        _bake_animation(each_obj)
-    # select baked
-    all_objs = bpy.context.scene.objects.items().copy()
-    bpy.ops.object.select_all(action="DESELECT")
-    for name, _each_obj in all_objs:
-        if name.startswith("Baked_"):
-            bpy.data.objects[name].select_set(True)
+        if name not in {"Light", "Camera", "Cube"}:
+            bake_animation(each_obj, first_frame, last_frame)
+    _select_baked()
 
     bpy.ops.export_scene.gltf(
         filepath=path.join(current_dir, f"../next/public/glb/{file_name}.glb"),
