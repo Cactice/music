@@ -131,15 +131,15 @@ def _import_json(json_file):
 def _main(input_file, blender_args):
     extension = path.splitext(input_file)[1]
     file_name = path.splitext(path.basename(input_file))[0]
-    if extension == "json":
+    if extension == ".json":
         _import_json(input_file)
-    elif extension == "blender":
+    elif extension == ".blender":
         bpy.ops.wm.open_mainfile(filepath=input_file)
 
     # bake animation for all objs
     all_objs = bpy.context.scene.objects.items().copy()
     for name, each_obj in all_objs:
-        if name in {"Light", "Camera"}:
+        if name in {"Light", "Camera", "Cube"}:
             continue
         _bake_animation(each_obj)
 
