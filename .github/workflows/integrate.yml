@@ -17,10 +17,12 @@ jobs:
         with:
           path: ./next/public/glb/**
           key: ${{ hashFiles('./sverchok/**') }}-glb
-
+      - name: set env
+        env:
+          CACHED: ${{ steps.cache-glb.outputs.cache-hit }}
   blender:
     needs: check_if_glb_cached
-    if: steps.cache-glb.outputs.cache-hit != 'true'
+    if: env.CACHED != 'true'
     runs-on: ubuntu-latest
     container: cactice/sverchok:latest
     steps:
@@ -49,7 +51,7 @@ jobs:
       #     path: ./next/public/glb/
   deploy_cache_refilled:
     needs: [blender]
-    if: steps.cache-glb.outputs.cache-hit != 'true'
+    if: env.CACHED != 'true'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -96,7 +98,7 @@ jobs:
   # Same job as above but executes on a different condition
   deploy_cached_glb:
     needs: [check_if_glb_cached]
-    if: steps.cache-glb.outputs.cache-hit == 'true'
+    if: CACHED == 'true'
     runs-on: ubuntu-latest
     defaults:
       run:
