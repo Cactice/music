@@ -89,33 +89,27 @@ jobs:
   # Same job as above but executes on a different condition
   deploy_cached_glb:
     needs: [check_if_glb_cached]
+    if: needs.check_if_glb_cached.outputs.CACHED=='true'
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./next
     steps:
-      - name: log
-        run: echo '${{ toJSON(needs.check_if_glb_cached) }}'
       - name: Checkout
-        if: needs.check_if_glb_cached.steps.cache-glb.outputs.cache-hit == 'true'
         uses: actions/checkout@v2
       - name: Setup Node
-        if: needs.check_if_glb_cached.steps.cache-glb.outputs.cache-hit == 'true'
         uses: actions/setup-node@v2.1.2
         with:
           node-version: "12.x"
       - name: Get yarn cache
-        if: needs.check_if_glb_cached.steps.cache-glb.outputs.cache-hit == 'true'
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
       - name: Retrieve cached glbd
-        if: needs.check_if_glb_cached.steps.cache-glb.outputs.cache-hit == 'true'
         uses: actions/cache@v2
         with:
           path: ./next/public/glb/**
           key: ${{  hashFiles('./sverchok/**')  }}-glb
       - name: Cache dependencies
-        if: needs.check_if_glb_cached.steps.cache-glb.outputs.cache-hit == 'true'
         uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
@@ -123,13 +117,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Yarn install and build
-        if: needs.check_if_glb_cached.steps.cache-glb.outputs.cache-hit == 'true'
         run: |
           rm ./public/glb/.gitignore
           yarn install --frozen-lockfile
           yarn build
       - name: Deploy
-        if: needs.check_if_glb_cached.steps.cache-glb.outputs.cache-hit == 'true'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
