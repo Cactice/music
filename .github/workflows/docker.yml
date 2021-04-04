@@ -24,7 +24,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: ./bpy
+          context: .
           push: true
           tags: user/app:latest
           cache-from: type=registry,ref=user/app:latest
