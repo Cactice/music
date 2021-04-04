@@ -12,8 +12,7 @@ const List: FC<ListProps> = ({ fileNames }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const pagesDirectory = path.resolve(process.cwd(), 'pages');
-  const fileNames = fs.readdirSync(path.join(pagesDirectory, '../public/glb')).filter((fileName) => fileName.endsWith('.glb'))
+  const fileNames = fs.readdirSync(path.join(process.cwd(), './public/glb')).filter((fileName) => fileName.endsWith('.glb'))
   const props: ListProps = { fileNames }
   return { props }
 }
