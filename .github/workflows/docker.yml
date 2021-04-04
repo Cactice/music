@@ -30,7 +30,7 @@ jobs:
           file: ./bpy/Dockerfile
           push: true
           tags: cactice/sverchok:latest
-          cache-from: type=registry,ref=user/app:latest
+          cache-from: type=registry,ref=cactice/sverchok:latest
           cache-to: type=inline
       -
         name: Image digest
