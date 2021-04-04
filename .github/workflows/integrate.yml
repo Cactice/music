@@ -17,6 +17,7 @@ jobs:
         with:
           path: ./next/public/glb/**
           key: ${{ hashFiles('./sverchok/**') }}-glb
+
   blender:
     needs: [check_if_glb_cached]
     if: needs.check_if_glb_cached.steps.cache-glb.outputs.cache-hit != 'true'
@@ -40,12 +41,7 @@ jobs:
         run: |
           blender -P install_sverchok.py -b
           blender -P json_to_glb.py -b --input_dir=../sverchok/ empty.blend
-      # -
-      #   name: Upload glb
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: glb-dir
-      #     path: ./next/public/glb/
+
   deploy_cache_refilled:
     needs: [check_if_glb_cached, blender]
     if: needs.check_if_glb_cached.steps.cache-glb.outputs.cache-hit != 'true'
@@ -56,22 +52,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
       - name: Setup Node
         uses: actions/setup-node@v2.1.2
         with:
           node-version: "12.x"
-
       - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-
       - name: Retrieve cached glbd
         uses: actions/cache@v2
         with:
           path: ./next/public/glb/**
           key: ${{  hashFiles('./sverchok/**')  }}-glb
-
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
@@ -79,7 +71,6 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-
       - name: Yarn install and build
         run: |
           rm ./public/glb/.gitignore
@@ -103,22 +94,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
       - name: Setup Node
         uses: actions/setup-node@v2.1.2
         with:
           node-version: "12.x"
-
       - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-
       - name: Retrieve cached glbd
         uses: actions/cache@v2
         with:
           path: ./next/public/glb/**
           key: ${{  hashFiles('./sverchok/**')  }}-glb
-
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
@@ -126,13 +113,11 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-
       - name: Yarn install and build
         run: |
           rm ./public/glb/.gitignore
           yarn install --frozen-lockfile
           yarn build
-
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
