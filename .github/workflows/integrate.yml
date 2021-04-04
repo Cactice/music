@@ -72,12 +72,12 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: Yarn install and build
+      - name: Yarn install
+        run: yarn install --frozen-lockfile
+      - name: Yarn build
         run: |
           rm ./public/glb/.gitignore
-          yarn install --frozen-lockfile
           yarn build
-
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -114,10 +114,12 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: Yarn install and build
+      - name: Yarn install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+      - name: Yarn build
         run: |
           rm ./public/glb/.gitignore
-          yarn install --frozen-lockfile
           yarn build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
