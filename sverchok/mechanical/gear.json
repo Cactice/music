@@ -172,6 +172,7 @@
         -1597.458984375
       ],
       "params": {
+        "is_merge": true,
         "selectable_objects": false
       },
       "use_custom_color": true,
