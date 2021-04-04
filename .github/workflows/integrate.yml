@@ -9,7 +9,7 @@ jobs:
   check_if_glb_cached:
     runs-on: ubuntu-latest
     outputs:
-      CACHED: ${{ steps.cache-glb.outputs.cache-hit  }}
+      cache-hit: ${{ steps.cache-glb.outputs.cache-hit  }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -87,7 +87,7 @@ jobs:
   # Same job as above but executes on a different condition
   deploy_cached_glb:
     needs: [check_if_glb_cached]
-    if: needs.check_if_glb_cached.outputs.CACHED=='true'
+    if: needs.check_if_glb_cached.outputs.cache-hit=='true'
     runs-on: ubuntu-latest
     defaults:
       run:
