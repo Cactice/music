@@ -17,8 +17,8 @@ jobs:
         with:
           path: ./next/public/glb/**
           key: ${{ hashFiles('./sverchok/**') }}-glb
-      - name: log
-        run: echo '${{ toJSON(steps.cache-glb.outputs) }}'
+      - name: output
+        run: echo '::set-output name=CACHED::${{ steps.cache-glb.outputs }}'
 
   # blender:
   #   needs: [check_if_glb_cached]
@@ -95,7 +95,7 @@ jobs:
         working-directory: ./next
     steps:
       - name: log
-        run: echo '${{ toJSON(needs.check_if_glb_cached) }}'
+        run: echo '${{ toJSON(needs.check_if_glb_cached.outputs.CACHED) }}'
       - name: Checkout
         if: needs.check_if_glb_cached.steps.cache-glb.outputs.cache-hit == 'true'
         uses: actions/checkout@v2
