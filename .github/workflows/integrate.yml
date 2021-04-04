@@ -35,6 +35,7 @@ jobs:
           name: glb-dir
           path: ./next/public/glb/
   deploy:
+    needs: [blender]
     runs-on: ubuntu-20.04
     defaults:
       run:
