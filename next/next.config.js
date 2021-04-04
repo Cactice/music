@@ -7,6 +7,7 @@ module.exports = {
     }
     return config
   },
+  basePath: "/sverchok-models",
   "parser": "@typescript-eslint/parser",
   "extends": [
     "plugin:@typescript-eslint/recommended",
