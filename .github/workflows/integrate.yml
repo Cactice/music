@@ -47,7 +47,7 @@ jobs:
       #     name: glb-dir
       #     path: ./next/public/glb/
   deploy_cache_refilled:
-    needs: [check_if_glb_cached]
+    needs: [check_if_glb_cached, blender]
     if: needs.check_if_glb_cached.steps.cache-glb.outputs.cache-hit != 'true'
     runs-on: ubuntu-latest
     defaults:
