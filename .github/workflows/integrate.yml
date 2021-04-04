@@ -29,7 +29,6 @@ jobs:
           blender -P json_to_glb.py -b --input_dir=../sverchok/ empty.blend
       -
         name: Upload glb
-        if: steps.cache-glb.outputs.cache-hit != 'true'
         uses: actions/upload-artifact@v2
         with:
           name: glb-dir
