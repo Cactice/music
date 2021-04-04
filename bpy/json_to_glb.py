@@ -2,13 +2,14 @@
 Converts a given json or .blender to glb file.
 
 Execution Script:
-blender -P json_to_glb.py -b \
---input_file=../sverchok/mechanical/ellipese-draw.json empty.blend
+blender -P json_to_glb.py -b --input_dir=../sverchok/ empty.blend
+
 
 This file should be able to process both .blender and sverchok generated .json files
 """
 import os
 import sys
+from glob import glob
 from pathlib import Path
 
 import click
@@ -85,21 +86,12 @@ def _import_json(json_file):
     JSONImporter.init_from_path(json_file).import_into_tree(_create_node_tree())
 
 
-@click.command(
-    context_settings={
-        "ignore_unknown_options": True,
-    },
-)
-@click.option(
-    "--input_file",
-    type=click.Path(exists=True),
-)
-@click.argument("blender_args", nargs=-1, type=click.UNPROCESSED)
-def _main(input_file, blender_args):
+def _export_file(input_file):
     first_frame = 0
     last_frame = 100
     bpy.ops.wm.read_homefile(use_empty=True)
     extension = path.splitext(input_file)[1]
+    file_dir = path.dirname(input_file).split("/sverchok/")[1]
     file_name = path.splitext(path.basename(input_file))[0]
     if extension == ".json":
         _import_json(input_file)
@@ -115,10 +107,37 @@ def _main(input_file, blender_args):
             bake_animation(each_obj, first_frame, last_frame)
     _select_baked()
 
+    os.makedirs(
+        path.join(current_dir, f"../next/public/glb/{file_dir}"),
+        exist_ok=True,
+    )
     bpy.ops.export_scene.gltf(
-        filepath=path.join(current_dir, f"../next/public/glb/{file_name}.glb"),
+        filepath=path.join(
+            current_dir,
+            f"../next/public/glb/{file_dir}/{file_name}.glb",
+        ),
         export_selected=True,
     )
+
+
+@click.command(
+    context_settings={
+        "ignore_unknown_options": True,
+    },
+)
+@click.option("--input_dir", type=click.Path(exists=True))
+@click.argument("blender_args", nargs=-1, type=click.UNPROCESSED)
+def _main(input_dir, blender_args):
+    original_files = glob(
+        path.join(current_dir, input_dir, "**/*.json"),
+        recursive=True,
+    ) + glob(
+        path.join(current_dir, input_dir, "**/*.blender"),
+        recursive=True,
+    )
+
+    for original_file in original_files:
+        _export_file(original_file)
 
 
 if __name__ == "__main__":
