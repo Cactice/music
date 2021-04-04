@@ -8,8 +8,8 @@ module.exports = {
     }
     return config;
   },
-  basePath: isProd ? '/sverchok-models' : '/',
-  assetPrefix: isProd ? '/sverchok-models/' : '/',
+  basePath: isProd ? '/sverchok-models' : '',
+  assetPrefix: isProd ? '/sverchok-models/' : '',
   parser: '@typescript-eslint/parser',
   extends: [
     'plugin:@typescript-eslint/recommended',

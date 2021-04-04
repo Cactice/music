@@ -2,9 +2,8 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { GetStaticProps } from 'next'
 import { FC } from 'react'
-import * as fs from "fs";
 import path from 'path';
-
+import glob from 'glob'
 type ListProps = { fileNames: string[] }
 
 const List: FC<ListProps> = ({ fileNames }) => {
@@ -12,7 +11,7 @@ const List: FC<ListProps> = ({ fileNames }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const fileNames = fs.readdirSync(path.join(process.cwd(), './public/glb')).filter((fileName) => fileName.endsWith('.glb'))
+  const fileNames = glob.sync(path.join(process.cwd(), './public/glb', '**/*.glb')).map((path) => (path.split('/glb/')[1]))
   const props: ListProps = { fileNames }
   return { props }
 }

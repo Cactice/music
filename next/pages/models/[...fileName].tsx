@@ -3,6 +3,7 @@ import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import { useRouter } from 'next/router';
 import path from 'path';
+import glob from 'glob'
 const Model = dynamic(
   () => import('~/components/model'),
   { ssr: false }
@@ -14,7 +15,7 @@ const ModelPage = () => {
   const singleFileName =
     typeof fileName === 'string' ?
       fileName
-      : fileName[0]
+      : fileName.join('/')
 
   return (<>
     <p>{singleFileName}</p>
@@ -24,17 +25,19 @@ const ModelPage = () => {
 }
 
 export const getStaticPaths = async () => {
-  const fileNames = fs.readdirSync(path.join(process.cwd(), './public/glb'))
-  const paths = fileNames.filter(
-    (fileName) => fileName.endsWith('.glb')
-  ).map((fileName) => ({
-    params: { fileName: fileName.split('.')[0] }
-  }))
+  const paths = glob.sync(
+    path.join(process.cwd(), './public/glb', '**/*.glb')
+  ).map((path) => (
+    {
+      params: { fileName: path.split('/glb/')[1].split('.')[0].split('/') }
+    }
+  ))
   return {
     paths,
     fallback: false
   };
 }
+
 export const getStaticProps: GetStaticProps = async () => {
   return { props: {} }
 }
