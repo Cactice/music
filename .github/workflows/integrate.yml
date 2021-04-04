@@ -44,7 +44,6 @@ jobs:
 
   deploy_cache_refilled:
     needs: [check_if_glb_cached, blender]
-    if: needs.check_if_glb_cached.steps.cache-glb.outputs.cache-hit != 'true'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -86,7 +85,7 @@ jobs:
   # Same job as above but executes on a different condition
   deploy_cached_glb:
     needs: [check_if_glb_cached]
-    if: needs.check_if_glb_cached.steps.cache-glb.outputs.cache-hit == 'true'
+    if: needs.check_if_glb_cached.steps.cache-glb.outputs.cache-hit === 'true'
     runs-on: ubuntu-latest
     defaults:
       run:
