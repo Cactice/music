@@ -20,71 +20,71 @@ jobs:
       - name: log
         run: echo '${{ toJSON(steps.cache-glb.outputs) }}'
 
-  blender:
-    needs: [check_if_glb_cached]
-    if: needs.check_if_glb_cached.steps.cache-glb.outputs.cache-hit != 'true'
-    runs-on: ubuntu-latest
-    container: cactice/sverchok:latest
-    steps:
-      - name: log
-        run: echo '${{ toJSON(needs.check_if_glb_cached.steps.cache-glb.outputs) }}'
-      - name: install zstd
-        run: apt-get install -y zstd
-        # Necessary for caching :
-        # https://github.com/actions/cache/issues/520#issuecomment-771813238
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Cache generated glb
-        id: cache-glb
-        uses: actions/cache@v2
-        with:
-          path: ./next/public/glb/**
-          key: ${{ hashFiles('./sverchok/**') }}-glb
-      - name: Generate glb
-        working-directory: ./bpy
-        run: |
-          blender -P install_sverchok.py -b
-          blender -P json_to_glb.py -b --input_dir=../sverchok/ empty.blend
+  # blender:
+  #   needs: [check_if_glb_cached]
+  #   if: needs.check_if_glb_cached.steps.cache-glb.outputs.cache-hit != 'true'
+  #   runs-on: ubuntu-latest
+  #   container: cactice/sverchok:latest
+  #   steps:
+  #     - name: log
+  #       run: echo '${{ toJSON(needs.check_if_glb_cached.steps.cache-glb.outputs) }}'
+  #     - name: install zstd
+  #       run: apt-get install -y zstd
+  #       # Necessary for caching :
+  #       # https://github.com/actions/cache/issues/520#issuecomment-771813238
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Cache generated glb
+  #       id: cache-glb
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: ./next/public/glb/**
+  #         key: ${{ hashFiles('./sverchok/**') }}-glb
+  #     - name: Generate glb
+  #       working-directory: ./bpy
+  #       run: |
+  #         blender -P install_sverchok.py -b
+  #         blender -P json_to_glb.py -b --input_dir=../sverchok/ empty.blend
 
-  deploy_cache_refilled:
-    needs: [blender]
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./next
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@v2.1.2
-        with:
-          node-version: "12.x"
-      - name: Get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - name: Retrieve cached glbd
-        uses: actions/cache@v2
-        with:
-          path: ./next/public/glb/**
-          key: ${{  hashFiles('./sverchok/**')  }}-glb
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: Yarn install and build
-        run: |
-          rm ./public/glb/.gitignore
-          yarn install --frozen-lockfile
-          yarn build
+  # deploy_cache_refilled:
+  #   needs: [blender]
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: ./next
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Setup Node
+  #       uses: actions/setup-node@v2.1.2
+  #       with:
+  #         node-version: "12.x"
+  #     - name: Get yarn cache
+  #       id: yarn-cache
+  #       run: echo "::set-output name=dir::$(yarn cache dir)"
+  #     - name: Retrieve cached glbd
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: ./next/public/glb/**
+  #         key: ${{  hashFiles('./sverchok/**')  }}-glb
+  #     - name: Cache dependencies
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: ${{ steps.yarn-cache.outputs.dir }}
+  #         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-yarn-
+  #     - name: Yarn install and build
+  #       run: |
+  #         rm ./public/glb/.gitignore
+  #         yarn install --frozen-lockfile
+  #         yarn build
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./next/out
+  #     - name: Deploy
+  #       uses: peaceiris/actions-gh-pages@v3
+  #       with:
+  #         github_token: ${{ secrets.GITHUB_TOKEN }}
+  #         publish_dir: ./next/out
 
   # Same job as above but executes on a different condition
   deploy_cached_glb:
@@ -95,7 +95,7 @@ jobs:
         working-directory: ./next
     steps:
       - name: log
-        run: echo '${{ toJSON(needs.check_if_glb_cached.steps.cache-glb.outputs) }}'
+        run: echo '${{ toJSON(needs.check_if_glb_cached) }}'
       - name: Checkout
         if: needs.check_if_glb_cached.steps.cache-glb.outputs.cache-hit == 'true'
         uses: actions/checkout@v2
