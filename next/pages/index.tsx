@@ -1,13 +1,14 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { GetStaticProps } from 'next'
-import { FC } from 'react'
+import Link from 'next/link'
+import React, { FC } from 'react'
 import path from 'path';
 import glob from 'glob'
 type ListProps = { fileNames: string[] }
 
 const List: FC<ListProps> = ({ fileNames }) => {
-  return <>{fileNames && fileNames.map((fileName) => <a href={`models/${fileName.split('.')[0]}`} key={fileName}>{fileName}</a>)}</>
+  return <>{fileNames && fileNames.map((fileName) => <Link href={`models/${fileName.split('.')[0]}`} key={fileName}><a>{fileName}</a></Link>)}</>
 }
 
 export const getStaticProps: GetStaticProps = async () => {
