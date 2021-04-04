@@ -9,16 +9,23 @@ jobs:
   check_if_glb_cached:
     runs-on: ubuntu-latest
     outputs:
-      cached: ${{ steps.cache-glb.outputs.cache-hit  }}
+      cached: ${{ steps.original-hash.outputs.hash == steps.restored-hash.outputs.hash  }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Memo original hash
+        id: original-hash
+        run: echo "::set-output name=hash::hashFiles(./next/public/glb/**)"
       - name: Check Glb Cache
         id: cache-glb
         uses: actions/cache@v2
         with:
           path: ./next/public/glb/**
-          key: ${{ hashFiles('./sverchok/**') }}-glb
+          key: ${{ hashFiles('./sverchok/**') }}-glb-readonly
+          restore-keys: ${{ hashFiles('./sverchok/**') }}-glb
+      - name: Memo restored hash
+        id: restored-hash
+        run: echo "::set-output name=hash::hashFiles(./next/public/glb/**)"
 
   regenerate-cache:
     needs: [check_if_glb_cached]
