@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from 'next/router';
 import path from 'path';
 import glob from 'glob'
+import { basePath } from '~/constants'
 const Model = dynamic(
   () => import('~/components/model'),
   { ssr: false }
@@ -19,7 +20,7 @@ const ModelPage = () => {
 
   return (<>
     <p>{singleFileName}</p>
-    <Model fileName={`/glb/${singleFileName}.glb`} />
+    <Model fileName={`${basePath}/glb/${singleFileName}.glb`} />
   </>
   )
 }
