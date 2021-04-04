@@ -55,6 +55,8 @@ jobs:
   deploy_reregenerated_glb:
     needs: [regenerate-cache]
     runs-on: ubuntu-latest
+    env:
+      NODE_ENV: production
     defaults:
       run:
         working-directory: ./next
