@@ -48,6 +48,7 @@ jobs:
       - name: Generate glb
         working-directory: ./bpy
         run: |
+          # FIXME: install_sverchok.py should be done on docker image and unnecessary here
           blender -P install_sverchok.py -b
           blender -P json_to_glb.py -b --input_dir=../sverchok/ empty.blend
 
