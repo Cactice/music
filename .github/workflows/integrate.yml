@@ -14,7 +14,7 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       - name: install zstd
-        run: sudo apt-get install -y zstd
+        run: apt-get install -y zstd
       -
         name: Cache
         id: cache-glb
