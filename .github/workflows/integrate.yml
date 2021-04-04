@@ -22,7 +22,6 @@ jobs:
           key: ${{ hashFiles('./next/public/glb/**')  }}-glb
       -
         name: Generate glb
-        if: steps.cache-glb.outputs.cache-hit != 'true'
         working-directory: ./bpy
         run: |
           blender -P install_sverchok.py -b
