@@ -17,4 +17,4 @@ jobs:
       -
         working-directory: ./bpy
         name: Generate glb
-        run: blender -P install_sverchok.py -b && blender -P json_to_glb.py -b --input_dir=../sverchok/ empty.blend
+        run: blender -P json_to_glb.py -b --input_dir=../sverchok/ empty.blend
