@@ -1,0 +1,19 @@
+name: glb export
+
+on:
+  push:
+    branches:
+      - main
+    # paths:
+    #   - 'sverchok/**'
+
+jobs:
+  docker:
+    container: cactice/sverchok:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      -
+        working-directory: ./bpy
+        name: Generate glb
+        run: ls && blender -P json_to_glb.py -b --input_dir=../sverchok/ empty.blend
