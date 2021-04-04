@@ -21,7 +21,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ./next/public/glb/**
-          key: ${{ hashFiles('./sverchok/**') }}-glb-readonly
+          key: ${{ hashFiles('./sverchok/**') }}-glb-readonly-${{ github.sha }}
           restore-keys: ${{ hashFiles('./sverchok/**') }}-glb
       - name: Memo restored hash
         id: restored-hash
@@ -29,7 +29,7 @@ jobs:
 
   regenerate-cache:
     needs: [check_if_glb_cached]
-    if: needs.check_if_glb_cached.outputs.cached != 'true'
+    if: needs.check_if_glb_cached.outputs.cached == 'false'
     runs-on: ubuntu-latest
     container: cactice/sverchok:latest
     steps:
