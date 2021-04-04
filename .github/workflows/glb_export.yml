@@ -9,6 +9,7 @@ on:
 
 jobs:
   docker:
+    runs-on: ubuntu-20.04
     container: cactice/sverchok:latest
     steps:
       - name: Checkout
