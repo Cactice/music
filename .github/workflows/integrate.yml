@@ -18,7 +18,7 @@ jobs:
           path: ./next/public/glb/**
           key: ${{ hashFiles('./sverchok/**') }}-glb
       - name: output
-        run: echo '::set-output name=CACHED::${{ steps.cache-glb.outputs }}'
+        run: echo '::set-output name=CACHED::${{ steps.cache-glb.outputs.cache-hit }}'
 
   # blender:
   #   needs: [check_if_glb_cached]
