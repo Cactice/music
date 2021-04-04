@@ -22,7 +22,7 @@ jobs:
         with:
           path: ./next/public/glb/**
           key: ${{ hashFiles('./sverchok/**') }}-glb-readonly-${{ github.sha }}
-          restore-keys: ${{ hashFiles('./sverchok/**') }}-glb
+          # restore-keys: ${{ hashFiles('./sverchok/**') }}-glb
       - name: Memo restored hash
         id: restored-hash
         run: echo "::set-output name=hash::${{ hashFiles('./next/public/glb/**') }}"
