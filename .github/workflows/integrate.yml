@@ -52,7 +52,7 @@ jobs:
           blender -P install_sverchok.py -b
           blender -P json_to_glb.py -b --input_dir=../sverchok/ empty.blend
 
-  deploy_cache_reregenerated:
+  deploy_reregenerated_glb:
     needs: [regenerate-cache]
     runs-on: ubuntu-latest
     defaults:
