@@ -17,17 +17,17 @@ export const getStaticProps: GetStaticProps = async () => {
   return { props }
 }
 
-export default function Home({ fileNames }) {
+const Home = ({ fileNames }) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Sverchok Models</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Sverchok Models
         </h1>
         <List {...{ fileNames }} />
       </main>
@@ -45,3 +45,5 @@ export default function Home({ fileNames }) {
     </div>
   )
 }
+
+export default Home

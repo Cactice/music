@@ -19,8 +19,8 @@ const ModelPage = () => {
       : fileName.join('/')
 
   return (<>
-    <p>{singleFileName}</p>
-    <Model fileName={`${basePath}/glb/${singleFileName}.glb`} />
+    <p style={{ textAlign: 'center' }}>{singleFileName}</p>
+    <Model props={{ style: { margin: '0 auto' } }} fileName={`${basePath}/glb/${singleFileName}.glb`} />
   </>
   )
 }

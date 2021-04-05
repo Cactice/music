@@ -1,4 +1,4 @@
-import { FC, Fragment } from "react"
+import React, { FC, Fragment } from "react"
 
 import "@google/model-viewer/dist/model-viewer";
 import dynamic from "next/dynamic";
@@ -20,8 +20,8 @@ interface ModelViewerJSX {
   // ... others
 }
 
-export const Model: FC<{ fileName }> = ({ fileName }) => (
-  <model-viewer src={fileName} camera-controls autoplay />
+export const Model: FC<{ fileName: string, props: React.HTMLAttributes<HTMLElement> }> = ({ fileName, props }) => (
+  <model-viewer {...props} src={fileName} camera-controls autoplay />
 )
 
 export default Model
