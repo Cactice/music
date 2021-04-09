@@ -88,7 +88,6 @@ jobs:
           path: ./next/.next/cache
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
       - name: Yarn install
-        if: steps.yarn-cache.outputs.cached != 'true'
         run: yarn install --frozen-lockfile
       - name: Yarn build
         run: |
@@ -136,7 +135,6 @@ jobs:
           path: ./next/.next/cache
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
       - name: Yarn install
-        if: steps.yarn-cache.outputs.cached != 'true'
         run: yarn install --frozen-lockfile
       - name: Yarn build
         run: |
