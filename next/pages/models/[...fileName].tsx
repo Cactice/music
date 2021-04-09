@@ -20,7 +20,7 @@ const ModelPage = () => {
 
   return (<>
     <p style={{ textAlign: 'center' }}>{singleFileName}</p>
-    <Model props={{ style: { margin: '0 auto' } }} fileName={`${basePath}/glb/${singleFileName}.glb`} />
+    <Model props={{ style: { margin: '0 auto', width: '100vw', height: '80vh' } }} fileName={`${basePath}/glb/${singleFileName}.glb`} />
   </>
   )
 }
