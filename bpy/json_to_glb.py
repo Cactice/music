@@ -116,7 +116,7 @@ def _export_file(input_file):
             current_dir,
             f"../next/public/glb/{file_dir}/{file_name}.glb",
         ),
-        export_selected=True,
+        use_selection=True,
     )
 
 
