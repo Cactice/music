@@ -2,6 +2,7 @@ import glob from 'glob';
 import { GetStaticProps } from "next";
 import { useRouter } from 'next/router';
 import path from 'path';
+import { basePath } from '~/constants';
 
 const ModelPage = () => {
   const router = useRouter()
@@ -14,7 +15,7 @@ const ModelPage = () => {
 
   return (<>
     <p style={{ textAlign: 'center' }}>{singleFileName}</p>
-    <iframe src={`/sunvox_frame.html?file=sunvox/${singleFileName}.sunvox`} style={{
+    <iframe src={`/${basePath}/sunvox_frame.html?file=sunvox/${singleFileName}.sunvox`} style={{
       display: 'block',
       border: 'none',
       height: '100vh',
