@@ -15,7 +15,7 @@ const ModelPage = () => {
 
   return (<>
     <p style={{ textAlign: 'center' }}>{singleFileName}</p>
-    <iframe src={`/${basePath}/sunvox_frame.html?file=sunvox/${singleFileName}.sunvox`} style={{
+    <iframe src={`${basePath}/sunvox_frame.html?file=sunvox/${singleFileName}.sunvox`} style={{
       display: 'block',
       border: 'none',
       height: '100vh',
