@@ -1,14 +1,8 @@
-import * as fs from "fs";
+import glob from 'glob';
 import { GetStaticProps } from "next";
-import dynamic from "next/dynamic";
 import { useRouter } from 'next/router';
 import path from 'path';
-import glob from 'glob'
-import { basePath } from '~/constants'
-const Model = dynamic(
-  () => import('~/components/model'),
-  { ssr: false }
-)
+
 const ModelPage = () => {
   const router = useRouter()
   const { fileName } = router.query
@@ -20,17 +14,22 @@ const ModelPage = () => {
 
   return (<>
     <p style={{ textAlign: 'center' }}>{singleFileName}</p>
-    <Model props={{ style: { margin: '0 auto', width: '100vw', height: '80vh' } }} fileName={`${basePath}/glb/${singleFileName}.glb`} />
+    <iframe src={`/sunvox_frame.html?file=sunvox/${singleFileName}.sunvox`} style={{
+      display: 'block',
+      border: 'none',
+      height: '100vh',
+      width: '100vw'
+    }} />
   </>
   )
 }
 
 export const getStaticPaths = async () => {
   const paths = glob.sync(
-    path.join(process.cwd(), './public/glb', '**/*.glb')
+    path.join(process.cwd(), './public/sunvox', '**/*.sunvox')
   ).map((path) => (
     {
-      params: { fileName: path.split('/glb/')[1].split('.')[0].split('/') }
+      params: { fileName: path.split('/sunvox/')[1].split('.')[0].split('/') }
     }
   ))
   return {
