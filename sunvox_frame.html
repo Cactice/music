@@ -1,0 +1,20 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JavaScript SunVox Player</title>
+</head>
+<script src="lib/sunvox.js"></script>
+<script src="lib/sunvox_lib_loader.js"></script>
+<script src="sunvox_load.js"></script>
+<body>
+<form action="">
+<button type="button" onclick="sv_play_from_beginning( 0 ); playStatus = 1; info();"><big>▶︎</big></button>
+<button type="button" onclick="sv_stop( 0 ); playStatus = 0;"><big>■</big></button>
+</form>
+<p>
+<canvas id="gfx" width="250" height="250"></canvas><br>
+<!-- <button type="button" onclick="anim();"><big>Animation ON/OFF</big></button> -->
+</p>
