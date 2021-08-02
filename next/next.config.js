@@ -8,8 +8,8 @@ module.exports = {
     }
     return config;
   },
-  basePath: isProd ? '/sunvox-music' : '',
-  assetPrefix: isProd ? '/sunvox-music/' : '',
+  basePath: isProd ? '/music' : '',
+  assetPrefix: isProd ? '/music/' : '',
   parser: '@typescript-eslint/parser',
   extends: [
     'plugin:@typescript-eslint/recommended',

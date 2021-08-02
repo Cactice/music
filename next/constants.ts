@@ -1,2 +1,2 @@
 const isProd = process.env.NODE_ENV === 'production';
-export const basePath = isProd ? '/sunvox-music' : '';
+export const basePath = isProd ? '/music' : '';
